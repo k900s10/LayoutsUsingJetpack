@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">test Compose</string>
+    <string name="happy_birthday_sam">Happy Birthday Sam!</string>
+    <string name="emma">Emma</string>
+
+    <!-- Article -->
+    <string name="title_activity_compose_article">ComposeArticle</string>
+    <string name="article_title">Jetpack Compose tutorial</string>
+    <string name="article_top_content">Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates UI development on Android with less code, powerful tools, and intuitive Kotlin APIs.</string>
+    <string name="article_bottom_content">In this tutorial, you build a simple UI component with declarative functions. You call Compose functions to say what elements you want and the Compose compiler does the rest. Compose is built around Composable functions. These functions let you define your app\'s UI programmatically because they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI\'s construction, such as initializing an element and then attaching it to a parent. To create a Composable function, you add the @Composable annotation to the function name.</string>
+
+    <!-- Task Manager -->
+    <string name="title_activity_task_manager">TaskManager</string>
+    <string name="task_manager_content_title">All tasks completed</string>
+    <string name="task_manager_content_description">Nice work!</string>
+
+    <!-- Compose Quadrant -->
+    <string name="compose_quadrant_content_text_title">Text composable</string>
+    <string name="compose_quadrant_content_text_content">Displays text and follows the recommended Material Design guidelines.</string>
+    <string name="compose_quadrant_content_image_title">Image composable</string>
+    <string name="compose_quadrant_content_image_content">Creates a composable that lays out and draws a given Painter class object.</string>
+    <string name="compose_quadrant_content_row_title">Row composable</string>
+    <string name="compose_quadrant_content_row_content">A layout composable that places its children in a horizontal sequence.</string>
+    <string name="compose_quadrant_content_column_title">Column composable</string>
+    <string name="compose_quadrant_content_column_content">A layout composable that places its children in a vertical sequence.</string>
+    <string name="title_activity_compose_quadrant">ComposeQuadrant</string>
+
+</resources>
