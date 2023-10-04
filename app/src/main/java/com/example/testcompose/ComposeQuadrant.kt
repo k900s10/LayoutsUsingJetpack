@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -64,10 +63,10 @@ fun Quadrant(modifier: Modifier = Modifier) {
             )
             CardView(
                 title = stringResource(
-                    id = R.string.compose_quadrant_content_text_title
+                    id = R.string.compose_quadrant_content_image_title
                 ),
                 description = stringResource(
-                    id = R.string.compose_quadrant_content_text_content
+                    id = R.string.compose_quadrant_content_image_content
                 ),
                 color = colorResource(
                     id = R.color.compose_quadrant_content_image
@@ -82,10 +81,10 @@ fun Quadrant(modifier: Modifier = Modifier) {
         ) {
             CardView(
                 title = stringResource(
-                    id = R.string.compose_quadrant_content_text_title
+                    id = R.string.compose_quadrant_content_row_title
                 ),
                 description = stringResource(
-                    id = R.string.compose_quadrant_content_text_content
+                    id = R.string.compose_quadrant_content_row_content
                 ),
                 color = colorResource(
                     id = R.color.compose_quadrant_content_row
@@ -95,10 +94,10 @@ fun Quadrant(modifier: Modifier = Modifier) {
             )
             CardView(
                 title = stringResource(
-                    id = R.string.compose_quadrant_content_text_title
+                    id = R.string.compose_quadrant_content_column_title
                 ),
                 description = stringResource(
-                    id = R.string.compose_quadrant_content_text_content
+                    id = R.string.compose_quadrant_content_column_content
                 ),
                 color = colorResource(
                     id = R.color.compose_quadrant_content_column
@@ -133,7 +132,7 @@ fun CardView(
         )
         Text(
             text = description,
-            textAlign = TextAlign.Justify
+            textAlign = TextAlign.Center
         )
     }
 }

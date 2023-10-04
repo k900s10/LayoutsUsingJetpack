@@ -67,7 +67,7 @@ fun BirthdayText(message: String, from: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun BirthdayImage(message: String, from: String, modifier: Modifier = Modifier) {
+fun BirthdayImage(message: String, from: String) {
     val image = painterResource(id = R.drawable.androidparty)
     Box {
         Image(
