@@ -6,6 +6,8 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <color name="android_background_color">#073042</color>
+    <color name="dark_green">#006b35</color>
     <color name="compose_quadrant_content_text">#FFEADDFF</color>
     <color name="compose_quadrant_content_image">#FFD0BCFF</color>
     <color name="compose_quadrant_content_row">#FFB69DF8</color>
