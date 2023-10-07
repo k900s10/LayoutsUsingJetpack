@@ -13,3 +13,5 @@ List of layouts created using Jetpack Compose
 ## ComposeQuadrant
 ![Compose Quadrant layout](screenshoot/quadrantView.png)
 
+## BusinessCard
+![Business Card layout](screenshoot/businessCard.png)
