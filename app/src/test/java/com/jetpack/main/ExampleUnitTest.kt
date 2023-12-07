@@ -1,4 +1,4 @@
-package com.art.scrollablelist
+package com.jetpack.main
 
 import org.junit.Test
 

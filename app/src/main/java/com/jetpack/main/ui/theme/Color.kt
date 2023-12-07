@@ -1,4 +1,4 @@
-package com.art.scrollablelist.ui.theme
+package com.jetpack.main.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

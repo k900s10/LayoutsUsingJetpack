@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.art.scrollablelist"
+    namespace = "com.jetpack.main"
     compileSdk = 34
 
     defaultConfig {
