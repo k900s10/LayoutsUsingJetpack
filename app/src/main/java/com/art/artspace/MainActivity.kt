@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,9 +35,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.art.artspace.ui.theme.ArtSpaceTheme
 
 class MainActivity : ComponentActivity() {
@@ -86,6 +90,106 @@ fun Greeting() {
         else -> ""
     }
 
+    BoxWithConstraints {
+        if (maxWidth < 600.dp) {
+            PhoneLayout(
+                image = image,
+                title = title,
+                artist = artist,
+                year = year,
+                onClickNext = { currentPortrait = currentPortrait.onClickNext() },
+                onClickPrevious = { currentPortrait = currentPortrait.onclickPrevious() },
+            )
+        }
+        if (maxWidth > 600.dp) {
+            TabletLayout(
+                image = image,
+                title = title,
+                artist = artist,
+                year = year,
+                onClickPrevious = { currentPortrait = currentPortrait.onclickPrevious() },
+                onClickNext = { currentPortrait = currentPortrait.onClickNext() })
+        }
+    }
+}
+
+private fun Int.onClickNext(): Int =
+    if (this == 2) {
+        1
+    } else
+        this + 1
+
+private fun Int.onclickPrevious(): Int =
+    if (this == 1) {
+        2
+    } else
+        this - 1
+
+@Composable
+fun TabletLayout(
+    @DrawableRes image: Int,
+    title: String,
+    artist: String,
+    year: String,
+    onClickPrevious: () -> Unit,
+    onClickNext: () -> Unit,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        ConstraintLayout {
+            val (portrait, description, controller) = createRefs()
+            Wall(
+                portrait = image,
+                Modifier
+                    .shadow(5.dp)
+                    .constrainAs(portrait) {
+                        top.linkTo(parent.top, margin = 24.dp)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
+            )
+            Description(
+                title = title,
+                artist = artist,
+                year = year,
+                Modifier
+                    .background(color = colorResource(id = R.color.light_gray))
+                    .padding(16.dp)
+                    .constrainAs(description) {
+                        top.linkTo(portrait.bottom, margin = 16.dp)
+                        start.linkTo(portrait.start)
+                        end.linkTo(portrait.end)
+                        width = Dimension.fillToConstraints
+                    }
+            )
+            Controller(
+                onClickPrevious = onClickPrevious,
+                onClickNext = onClickNext,
+                Modifier
+                    .padding(start = 24.dp, end = 24.dp)
+                    .fillMaxWidth()
+                    .constrainAs(controller) {
+                        top.linkTo(description.bottom, margin = 24.dp)
+//                        start.linkTo(parent.start, margin = 24.dp)
+//                        end.linkTo(parent.end, margin = 24.dp)
+                    },
+            )
+        }
+
+    }
+}
+
+@Composable
+fun PhoneLayout(
+    @DrawableRes image: Int,
+    title: String,
+    artist: String,
+    year: String,
+    onClickNext: () -> Unit,
+    onClickPrevious: () -> Unit,
+) {
     Column(
         Modifier
             .padding(16.dp)
@@ -95,7 +199,12 @@ fun Greeting() {
             Modifier.weight(4f),
             verticalArrangement = Arrangement.Center
         ) {
-            Wall(portrait = image)
+            Wall(
+                portrait = image,
+                Modifier
+                    .shadow(5.dp)
+                    .fillMaxWidth()
+            )
         }
         Column(
             Modifier
@@ -105,32 +214,27 @@ fun Greeting() {
             Description(
                 title = title,
                 artist = artist,
-                year = year
+                year = year,
+                Modifier
+                    .background(color = colorResource(id = R.color.light_gray))
+                    .fillMaxWidth()
+                    .padding(16.dp)
             )
             Controller(
-                onClickNext = {
-                    if (currentPortrait == 2) {
-                        currentPortrait = 1
-                    } else
-                        currentPortrait++
-                },
-                onClickPrevious = {
-                    if (currentPortrait == 1) {
-                        currentPortrait = 2
-                    } else
-                        currentPortrait--
-                },
+                onClickPrevious = onClickPrevious,
+                onClickNext = onClickNext,
+                Modifier
+                    .fillMaxWidth(),
             )
         }
     }
+
 }
 
 @Composable
-fun Wall(@DrawableRes portrait: Int) {
+fun Wall(@DrawableRes portrait: Int, modifier: Modifier = Modifier) {
     Column(
-        Modifier
-            .shadow(5.dp)
-            .fillMaxWidth(),
+        modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -145,13 +249,10 @@ fun Wall(@DrawableRes portrait: Int) {
 }
 
 @Composable
-fun Description(title: String, artist: String, year: String) {
+fun Description(title: String, artist: String, year: String, modifier: Modifier = Modifier) {
     Column(
-        Modifier
-            .background(color = colorResource(id = R.color.light_gray))
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.SpaceAround
+        modifier,
+        verticalArrangement = Arrangement.SpaceAround,
     ) {
         Text(
             text = title,
@@ -174,11 +275,11 @@ fun Description(title: String, artist: String, year: String) {
 @Composable
 fun Controller(
     onClickPrevious: () -> Unit,
-    onClickNext: () -> Unit
+    onClickNext: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        Modifier
-            .fillMaxWidth(),
+        modifier,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -209,7 +310,7 @@ fun Controller(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "tablet", device = Devices.TABLET)
 @Composable
 fun GreetingPreview() {
     ArtSpaceTheme {
