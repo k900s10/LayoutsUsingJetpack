@@ -1,3 +1,4 @@
 <resources>
+    change the app name before running it. <>
     <string name="app_name">ScrollableList</string>
 </resources>
